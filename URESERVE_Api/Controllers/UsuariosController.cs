@@ -25,14 +25,18 @@ namespace URESERVE_Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuarios>>> GetUsuarios()
         {
-            return await _context.Usuarios.ToListAsync();
+            return await _context.Usuarios
+                .Include(u => u.Estudiante)
+                .ToListAsync();
         }
 
         // GET: api/Usuarios/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuarios>> GetUsuarios(int id)
         {
-            var usuarios = await _context.Usuarios.FindAsync(id);
+            var usuarios = await _context.Usuarios
+                .Include(u => u.Estudiante)
+                .FirstOrDefaultAsync(u => u.UsuarioId == id);
 
             if (usuarios == null)
             {
