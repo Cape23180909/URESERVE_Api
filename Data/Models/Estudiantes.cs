@@ -13,4 +13,5 @@ public class Estudiantes
 
     public string Matricula { get; set; }
     public string Facultad { get; set; }
+    public string Carrera { get; set; }
 }

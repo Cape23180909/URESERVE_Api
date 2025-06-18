@@ -35,7 +35,8 @@ namespace URESERVE_Api.Migrations
                     EstudianteId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Matricula = table.Column<string>(type: "TEXT", nullable: false),
-                    Facultad = table.Column<string>(type: "TEXT", nullable: false)
+                    Facultad = table.Column<string>(type: "TEXT", nullable: false),
+                    Carrera = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,11 +154,17 @@ namespace URESERVE_Api.Migrations
                     Nombres = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Apellidos = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     CorreoInstitucional = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
-                    Clave = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                    Clave = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    EstudianteId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_Estudiantes_EstudianteId",
+                        column: x => x.EstudianteId,
+                        principalTable: "Estudiantes",
+                        principalColumn: "EstudianteId");
                 });
 
             migrationBuilder.CreateTable(
@@ -378,6 +385,11 @@ namespace URESERVE_Api.Migrations
                 name: "IX_DetallesReservaRestaurantes_RestauranteId",
                 table: "DetallesReservaRestaurantes",
                 column: "RestauranteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_EstudianteId",
+                table: "Usuarios",
+                column: "EstudianteId");
         }
 
         /// <inheritdoc />
@@ -414,13 +426,13 @@ namespace URESERVE_Api.Migrations
                 name: "Proyectores");
 
             migrationBuilder.DropTable(
-                name: "Estudiantes");
-
-            migrationBuilder.DropTable(
                 name: "Reservaciones");
 
             migrationBuilder.DropTable(
                 name: "Restaurantes");
+
+            migrationBuilder.DropTable(
+                name: "Estudiantes");
         }
     }
 }

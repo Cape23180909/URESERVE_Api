@@ -11,7 +11,7 @@ using URESERVE_Api.DAL;
 namespace URESERVE_Api.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250616020451_Inicial")]
+    [Migration("20250618055327_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -241,6 +241,10 @@ namespace URESERVE_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Carrera")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Facultad")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -434,12 +438,17 @@ namespace URESERVE_Api.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("EstudianteId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Nombres")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("UsuarioId");
+
+                    b.HasIndex("EstudianteId");
 
                     b.ToTable("Usuarios");
                 });
@@ -550,6 +559,15 @@ namespace URESERVE_Api.Migrations
                     b.Navigation("Reservacion");
 
                     b.Navigation("Restaurante");
+                });
+
+            modelBuilder.Entity("Data.Models.Usuarios", b =>
+                {
+                    b.HasOne("Data.Models.Estudiantes", "Estudiante")
+                        .WithMany()
+                        .HasForeignKey("EstudianteId");
+
+                    b.Navigation("Estudiante");
                 });
 #pragma warning restore 612, 618
         }
