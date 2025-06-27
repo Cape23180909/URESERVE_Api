@@ -151,9 +151,6 @@ namespace URESERVE_Api.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("EstudianteId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
@@ -167,19 +164,12 @@ namespace URESERVE_Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProyectorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ReservacionId")
+                    b.Property<int?>("ProyectorId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("DetalleReservaProyectorId");
 
-                    b.HasIndex("EstudianteId");
-
                     b.HasIndex("ProyectorId");
-
-                    b.HasIndex("ReservacionId");
 
                     b.ToTable("DetallesReservaProyectores");
                 });
@@ -287,16 +277,15 @@ namespace URESERVE_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CodigoReserva")
+                    b.Property<int>("Cantidad")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Estado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
+                    b.Property<string>("Conectividad")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Horario")
+                    b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ProyectorId");
@@ -506,29 +495,11 @@ namespace URESERVE_Api.Migrations
 
             modelBuilder.Entity("Data.Models.DetalleReservaProyector", b =>
                 {
-                    b.HasOne("Data.Models.Estudiantes", "Estudiante")
-                        .WithMany()
-                        .HasForeignKey("EstudianteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Models.Proyectores", "Proyector")
                         .WithMany()
-                        .HasForeignKey("ProyectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Models.Reservaciones", "Reservacion")
-                        .WithMany()
-                        .HasForeignKey("ReservacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Estudiante");
+                        .HasForeignKey("ProyectorId");
 
                     b.Navigation("Proyector");
-
-                    b.Navigation("Reservacion");
                 });
 
             modelBuilder.Entity("Data.Models.DetalleReservaRestaurante", b =>

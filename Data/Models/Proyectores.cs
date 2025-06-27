@@ -11,8 +11,9 @@ public class Proyectores
 {
     [Key]
     public int ProyectorId { get; set; }
-    public DateTime Fecha { get; set; }
-    public TimeSpan Horario { get; set; }
-    public int Estado { get; set; }
-    public int CodigoReserva { get; set; }
+
+    // Información del inventario
+    public string Nombre { get; set; }
+    public int Cantidad { get; set; }
+    public string Conectividad { get; set; }  // Ej: HDMI, VGA, USB
 }
