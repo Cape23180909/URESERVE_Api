@@ -11,7 +11,7 @@ using URESERVE_Api.DAL;
 namespace URESERVE_Api.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250626045450_Inicial")]
+    [Migration("20250628042257_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
