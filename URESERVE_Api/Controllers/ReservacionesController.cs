@@ -43,7 +43,6 @@ namespace URESERVE_Api.Controllers
         }
 
         // PUT: api/Reservaciones/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReservaciones(int id, Reservaciones reservaciones)
         {
@@ -74,14 +73,26 @@ namespace URESERVE_Api.Controllers
         }
 
         // POST: api/Reservaciones
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Reservaciones>> PostReservaciones(Reservaciones reservaciones)
+        public async Task<ActionResult<Reservaciones>> PostReservaciones(
+            [FromBody] ReservacionesDto reservacionDto) // Cambiado para aceptar DTO directamente
         {
-            _context.Reservaciones.Add(reservaciones);
+            // Mapear el DTO a la entidad Reservaciones
+            var reservacion = new Reservaciones
+            {
+                CodigoReserva = reservacionDto.CodigoReserva,
+                TipoReserva = reservacionDto.TipoReserva,
+                CantidadEstudiantes = reservacionDto.CantidadEstudiantes,
+                Fecha = DateTime.Parse(reservacionDto.Fecha), // Convertir string a DateTime
+                Horario = TimeSpan.Parse(reservacionDto.Horario), // Convertir string a TimeSpan
+                Estado = reservacionDto.Estado,
+                Matricula = reservacionDto.Matricula
+            };
+
+            _context.Reservaciones.Add(reservacion);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReservaciones", new { id = reservaciones.ReservacionId }, reservaciones);
+            return CreatedAtAction("GetReservaciones", new { id = reservacion.ReservacionId }, reservacion);
         }
 
         // DELETE: api/Reservaciones/5
@@ -104,5 +115,18 @@ namespace URESERVE_Api.Controllers
         {
             return _context.Reservaciones.Any(e => e.ReservacionId == id);
         }
+    }
+
+    // Clase DTO para recibir los datos desde Android
+    public class ReservacionesDto
+    {
+        public int ReservacionId { get; set; }
+        public int CodigoReserva { get; set; }
+        public int TipoReserva { get; set; }
+        public int CantidadEstudiantes { get; set; }
+        public string Fecha { get; set; } // Recibida como string desde Android
+        public string Horario { get; set; } // Recibida como string desde Android
+        public int Estado { get; set; }
+        public string Matricula { get; set; }
     }
 }
