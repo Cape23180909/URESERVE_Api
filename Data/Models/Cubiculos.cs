@@ -11,9 +11,8 @@ public class Cubiculos
 {
     [Key]
     public int CubiculoId { get; set; }
-    public DateTime Fecha { get; set; }
-    public TimeSpan Horario { get; set; }
-    public int CantidadEstudiantes { get; set; }
-    public int Estado { get; set; }
-    public int CodigoReserva { get; set; }
+
+    public string Nombre { get; set; }
+
+    public bool Disponible { get; set; }
 }

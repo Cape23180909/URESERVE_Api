@@ -23,24 +23,78 @@ namespace URESERVE_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CantidadEstudiantes")
+                    b.Property<bool>("Disponible")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CodigoReserva")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Estado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeSpan>("Horario")
+                    b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("CubiculoId");
 
                     b.ToTable("Cubiculos");
+
+                    b.HasData(
+                        new
+                        {
+                            CubiculoId = 1,
+                            Disponible = true,
+                            Nombre = "Cubículo 1"
+                        },
+                        new
+                        {
+                            CubiculoId = 2,
+                            Disponible = true,
+                            Nombre = "Cubículo 2"
+                        },
+                        new
+                        {
+                            CubiculoId = 3,
+                            Disponible = true,
+                            Nombre = "Cubículo 3"
+                        },
+                        new
+                        {
+                            CubiculoId = 4,
+                            Disponible = true,
+                            Nombre = "Cubículo 4"
+                        },
+                        new
+                        {
+                            CubiculoId = 5,
+                            Disponible = true,
+                            Nombre = "Cubículo 5"
+                        },
+                        new
+                        {
+                            CubiculoId = 6,
+                            Disponible = true,
+                            Nombre = "Cubículo 6"
+                        },
+                        new
+                        {
+                            CubiculoId = 7,
+                            Disponible = true,
+                            Nombre = "Cubículo 7"
+                        },
+                        new
+                        {
+                            CubiculoId = 8,
+                            Disponible = false,
+                            Nombre = "Cubículo 8"
+                        },
+                        new
+                        {
+                            CubiculoId = 9,
+                            Disponible = true,
+                            Nombre = "Cubículo 9"
+                        },
+                        new
+                        {
+                            CubiculoId = 10,
+                            Disponible = false,
+                            Nombre = "Cubículo 10"
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.DetalleReservaCubiculo", b =>
@@ -61,9 +115,6 @@ namespace URESERVE_Api.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("EstudianteId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
@@ -77,16 +128,9 @@ namespace URESERVE_Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ReservacionId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("DetalleReservaCubiculoId");
 
                     b.HasIndex("CubiculoId");
-
-                    b.HasIndex("EstudianteId");
-
-                    b.HasIndex("ReservacionId");
 
                     b.ToTable("DetallesReservaCubiculos");
                 });
@@ -106,9 +150,6 @@ namespace URESERVE_Api.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("EstudianteId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
@@ -125,16 +166,9 @@ namespace URESERVE_Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ReservacionId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("DetalleReservaLaboratorioId");
 
-                    b.HasIndex("EstudianteId");
-
                     b.HasIndex("LaboratorioId");
-
-                    b.HasIndex("ReservacionId");
 
                     b.ToTable("DetallesReservaLaboratorios");
                 });
@@ -251,24 +285,48 @@ namespace URESERVE_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CantidadEstudiantes")
+                    b.Property<bool>("Disponible")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CodigoReserva")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Estado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeSpan>("Horario")
+                    b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("LaboratorioId");
 
                     b.ToTable("Laboratorios");
+
+                    b.HasData(
+                        new
+                        {
+                            LaboratorioId = 1,
+                            Disponible = true,
+                            Nombre = "Laboratorio A"
+                        },
+                        new
+                        {
+                            LaboratorioId = 2,
+                            Disponible = true,
+                            Nombre = "Laboratorio B"
+                        },
+                        new
+                        {
+                            LaboratorioId = 3,
+                            Disponible = true,
+                            Nombre = "Laboratorio C"
+                        },
+                        new
+                        {
+                            LaboratorioId = 4,
+                            Disponible = true,
+                            Nombre = "Laboratorio D"
+                        },
+                        new
+                        {
+                            LaboratorioId = 5,
+                            Disponible = true,
+                            Nombre = "Laboratorio E"
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.Proyectores", b =>
@@ -291,6 +349,36 @@ namespace URESERVE_Api.Migrations
                     b.HasKey("ProyectorId");
 
                     b.ToTable("Proyectores");
+
+                    b.HasData(
+                        new
+                        {
+                            ProyectorId = 1,
+                            Cantidad = 5,
+                            Conectividad = "HDMI, VGA",
+                            Nombre = "Proyector Epson EB-X41"
+                        },
+                        new
+                        {
+                            ProyectorId = 2,
+                            Cantidad = 3,
+                            Conectividad = "HDMI, USB, Wireless",
+                            Nombre = "Proyector BenQ MW632"
+                        },
+                        new
+                        {
+                            ProyectorId = 3,
+                            Cantidad = 2,
+                            Conectividad = "HDMI, VGA, LAN",
+                            Nombre = "Proyector Sony VPL-DX120"
+                        },
+                        new
+                        {
+                            ProyectorId = 4,
+                            Cantidad = 4,
+                            Conectividad = "HDMI, VGA, USB",
+                            Nombre = "Proyector Optoma X341"
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.Reportes", b =>
@@ -368,19 +456,27 @@ namespace URESERVE_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CantidadEstudiantes")
+                    b.Property<int>("Capacidad")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CodigoReserva")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Estado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
+                    b.Property<string>("Correo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Horario")
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Ubicacion")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("RestauranteId");
@@ -447,50 +543,18 @@ namespace URESERVE_Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Models.Estudiantes", "Estudiante")
-                        .WithMany()
-                        .HasForeignKey("EstudianteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Models.Reservaciones", "Reservacion")
-                        .WithMany()
-                        .HasForeignKey("ReservacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Cubiculo");
-
-                    b.Navigation("Estudiante");
-
-                    b.Navigation("Reservacion");
                 });
 
             modelBuilder.Entity("Data.Models.DetalleReservaLaboratorio", b =>
                 {
-                    b.HasOne("Data.Models.Estudiantes", "Estudiante")
-                        .WithMany()
-                        .HasForeignKey("EstudianteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Models.Laboratorios", "Laboratorio")
                         .WithMany()
                         .HasForeignKey("LaboratorioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Models.Reservaciones", "Reservacion")
-                        .WithMany()
-                        .HasForeignKey("ReservacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Estudiante");
-
                     b.Navigation("Laboratorio");
-
-                    b.Navigation("Reservacion");
                 });
 
             modelBuilder.Entity("Data.Models.DetalleReservaProyector", b =>

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace URESERVE_Api.Migrations
 {
     /// <inheritdoc />
@@ -17,11 +19,8 @@ namespace URESERVE_Api.Migrations
                 {
                     CubiculoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
-                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
-                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false)
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    Disponible = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,11 +48,8 @@ namespace URESERVE_Api.Migrations
                 {
                     LaboratorioId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
-                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
-                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false)
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    Disponible = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,11 +116,12 @@ namespace URESERVE_Api.Migrations
                 {
                     RestauranteId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
-                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
-                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false)
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    Ubicacion = table.Column<string>(type: "TEXT", nullable: false),
+                    Capacidad = table.Column<int>(type: "INTEGER", nullable: false),
+                    Telefono = table.Column<string>(type: "TEXT", nullable: false),
+                    Correo = table.Column<string>(type: "TEXT", nullable: false),
+                    Descripcion = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,6 +139,32 @@ namespace URESERVE_Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TiposCargo", x => x.TipoCargoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DetallesReservaCubiculos",
+                columns: table => new
+                {
+                    DetalleReservaCubiculoId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false),
+                    IdCubiculo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Matricula = table.Column<string>(type: "TEXT", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
+                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
+                    CubiculoId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetallesReservaCubiculos", x => x.DetalleReservaCubiculoId);
+                    table.ForeignKey(
+                        name: "FK_DetallesReservaCubiculos_Cubiculos_CubiculoId",
+                        column: x => x.CubiculoId,
+                        principalTable: "Cubiculos",
+                        principalColumn: "CubiculoId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,6 +190,32 @@ namespace URESERVE_Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DetallesReservaLaboratorios",
+                columns: table => new
+                {
+                    DetalleReservaLaboratorioId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false),
+                    IdLaboratorio = table.Column<int>(type: "INTEGER", nullable: false),
+                    Matricula = table.Column<string>(type: "TEXT", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
+                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
+                    LaboratorioId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetallesReservaLaboratorios", x => x.DetalleReservaLaboratorioId);
+                    table.ForeignKey(
+                        name: "FK_DetallesReservaLaboratorios_Laboratorios_LaboratorioId",
+                        column: x => x.LaboratorioId,
+                        principalTable: "Laboratorios",
+                        principalColumn: "LaboratorioId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DetallesReservaProyectores",
                 columns: table => new
                 {
@@ -188,86 +237,6 @@ namespace URESERVE_Api.Migrations
                         column: x => x.ProyectorId,
                         principalTable: "Proyectores",
                         principalColumn: "ProyectorId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DetallesReservaCubiculos",
-                columns: table => new
-                {
-                    DetalleReservaCubiculoId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false),
-                    IdCubiculo = table.Column<int>(type: "INTEGER", nullable: false),
-                    Matricula = table.Column<string>(type: "TEXT", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
-                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
-                    ReservacionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CubiculoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EstudianteId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DetallesReservaCubiculos", x => x.DetalleReservaCubiculoId);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaCubiculos_Cubiculos_CubiculoId",
-                        column: x => x.CubiculoId,
-                        principalTable: "Cubiculos",
-                        principalColumn: "CubiculoId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaCubiculos_Estudiantes_EstudianteId",
-                        column: x => x.EstudianteId,
-                        principalTable: "Estudiantes",
-                        principalColumn: "EstudianteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaCubiculos_Reservaciones_ReservacionId",
-                        column: x => x.ReservacionId,
-                        principalTable: "Reservaciones",
-                        principalColumn: "ReservacionId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DetallesReservaLaboratorios",
-                columns: table => new
-                {
-                    DetalleReservaLaboratorioId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false),
-                    IdLaboratorio = table.Column<int>(type: "INTEGER", nullable: false),
-                    Matricula = table.Column<string>(type: "TEXT", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
-                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
-                    ReservacionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LaboratorioId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EstudianteId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DetallesReservaLaboratorios", x => x.DetalleReservaLaboratorioId);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaLaboratorios_Estudiantes_EstudianteId",
-                        column: x => x.EstudianteId,
-                        principalTable: "Estudiantes",
-                        principalColumn: "EstudianteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaLaboratorios_Laboratorios_LaboratorioId",
-                        column: x => x.LaboratorioId,
-                        principalTable: "Laboratorios",
-                        principalColumn: "LaboratorioId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaLaboratorios_Reservaciones_ReservacionId",
-                        column: x => x.ReservacionId,
-                        principalTable: "Reservaciones",
-                        principalColumn: "ReservacionId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -310,35 +279,55 @@ namespace URESERVE_Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Cubiculos",
+                columns: new[] { "CubiculoId", "Disponible", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, true, "Cubículo 1" },
+                    { 2, true, "Cubículo 2" },
+                    { 3, true, "Cubículo 3" },
+                    { 4, true, "Cubículo 4" },
+                    { 5, true, "Cubículo 5" },
+                    { 6, true, "Cubículo 6" },
+                    { 7, true, "Cubículo 7" },
+                    { 8, false, "Cubículo 8" },
+                    { 9, true, "Cubículo 9" },
+                    { 10, false, "Cubículo 10" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Laboratorios",
+                columns: new[] { "LaboratorioId", "Disponible", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, true, "Laboratorio A" },
+                    { 2, true, "Laboratorio B" },
+                    { 3, true, "Laboratorio C" },
+                    { 4, true, "Laboratorio D" },
+                    { 5, true, "Laboratorio E" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Proyectores",
+                columns: new[] { "ProyectorId", "Cantidad", "Conectividad", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, 5, "HDMI, VGA", "Proyector Epson EB-X41" },
+                    { 2, 3, "HDMI, USB, Wireless", "Proyector BenQ MW632" },
+                    { 3, 2, "HDMI, VGA, LAN", "Proyector Sony VPL-DX120" },
+                    { 4, 4, "HDMI, VGA, USB", "Proyector Optoma X341" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DetallesReservaCubiculos_CubiculoId",
                 table: "DetallesReservaCubiculos",
                 column: "CubiculoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaCubiculos_EstudianteId",
-                table: "DetallesReservaCubiculos",
-                column: "EstudianteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaCubiculos_ReservacionId",
-                table: "DetallesReservaCubiculos",
-                column: "ReservacionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaLaboratorios_EstudianteId",
-                table: "DetallesReservaLaboratorios",
-                column: "EstudianteId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DetallesReservaLaboratorios_LaboratorioId",
                 table: "DetallesReservaLaboratorios",
                 column: "LaboratorioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaLaboratorios_ReservacionId",
-                table: "DetallesReservaLaboratorios",
-                column: "ReservacionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetallesReservaProyectores_ProyectorId",

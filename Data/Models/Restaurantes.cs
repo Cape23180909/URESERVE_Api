@@ -11,9 +11,10 @@ public class Restaurantes
 {
     [Key]
     public int RestauranteId { get; set; }
-    public DateTime Fecha { get; set; }
-    public TimeSpan Horario { get; set; }
-    public int CantidadEstudiantes { get; set; }
-    public int Estado { get; set; }
-    public int CodigoReserva { get; set; }
+    public string Nombre { get; set; } = string.Empty;
+    public string Ubicacion { get; set; } = string.Empty;
+    public int Capacidad { get; set; }
+    public string Telefono { get; set; } = string.Empty;
+    public string Correo { get; set; } = string.Empty;
+    public string Descripcion { get; set; } = string.Empty;
 }

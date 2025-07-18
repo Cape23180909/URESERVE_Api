@@ -111,6 +111,22 @@ namespace URESERVE_Api.Controllers
             return NoContent();
         }
 
+        // GET: api/Reservaciones/usuario/2021-0422
+        [HttpGet("usuario/{matricula}")]
+        public async Task<ActionResult<IEnumerable<Reservaciones>>> GetReservacionesByMatricula(string matricula)
+        {
+            var reservas = await _context.Reservaciones
+                .Where(r => r.Matricula == matricula)
+                .ToListAsync();
+
+            if (reservas == null || !reservas.Any())
+            {
+                return NotFound($"No se encontraron reservaciones para la matrícula: {matricula}");
+            }
+
+            return Ok(reservas);
+        }
+
         private bool ReservacionesExists(int id)
         {
             return _context.Reservaciones.Any(e => e.ReservacionId == id);
