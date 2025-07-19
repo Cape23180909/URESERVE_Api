@@ -101,7 +101,8 @@ namespace URESERVE_Api.Migrations
                     TipoReserva = table.Column<int>(type: "INTEGER", nullable: false),
                     CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
                     Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    HoraInicio = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    HoraFin = table.Column<TimeSpan>(type: "TEXT", nullable: false),
                     Estado = table.Column<int>(type: "INTEGER", nullable: false),
                     Matricula = table.Column<string>(type: "TEXT", nullable: false)
                 },

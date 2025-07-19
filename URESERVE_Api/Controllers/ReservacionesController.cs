@@ -75,7 +75,7 @@ namespace URESERVE_Api.Controllers
         // POST: api/Reservaciones
         [HttpPost]
         public async Task<ActionResult<Reservaciones>> PostReservaciones(
-            [FromBody] ReservacionesDto reservacionDto) // Cambiado para aceptar DTO directamente
+            [FromBody] ReservacionesDto reservacionDto)
         {
             // Mapear el DTO a la entidad Reservaciones
             var reservacion = new Reservaciones
@@ -83,8 +83,9 @@ namespace URESERVE_Api.Controllers
                 CodigoReserva = reservacionDto.CodigoReserva,
                 TipoReserva = reservacionDto.TipoReserva,
                 CantidadEstudiantes = reservacionDto.CantidadEstudiantes,
-                Fecha = DateTime.Parse(reservacionDto.Fecha), // Convertir string a DateTime
-                Horario = TimeSpan.Parse(reservacionDto.Horario), // Convertir string a TimeSpan
+                Fecha = DateTime.Parse(reservacionDto.Fecha),
+                HoraInicio = TimeSpan.Parse(reservacionDto.HoraInicio), // Nueva propiedad
+                HoraFin = TimeSpan.Parse(reservacionDto.HoraFin),       // Nueva propiedad
                 Estado = reservacionDto.Estado,
                 Matricula = reservacionDto.Matricula
             };
@@ -140,8 +141,9 @@ namespace URESERVE_Api.Controllers
         public int CodigoReserva { get; set; }
         public int TipoReserva { get; set; }
         public int CantidadEstudiantes { get; set; }
-        public string Fecha { get; set; } // Recibida como string desde Android
-        public string Horario { get; set; } // Recibida como string desde Android
+        public string Fecha { get; set; }
+        public string HoraInicio { get; set; } // Nueva propiedad
+        public string HoraFin { get; set; }    // Nueva propiedad
         public int Estado { get; set; }
         public string Matricula { get; set; }
     }

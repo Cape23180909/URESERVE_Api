@@ -11,7 +11,7 @@ using URESERVE_Api.DAL;
 namespace URESERVE_Api.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250709161911_Inicial")]
+    [Migration("20250719114051_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -438,7 +438,10 @@ namespace URESERVE_Api.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Horario")
+                    b.Property<TimeSpan>("HoraFin")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeSpan>("HoraInicio")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Matricula")

@@ -435,7 +435,10 @@ namespace URESERVE_Api.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Horario")
+                    b.Property<TimeSpan>("HoraFin")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeSpan>("HoraInicio")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Matricula")
