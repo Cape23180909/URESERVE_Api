@@ -20,6 +20,7 @@ public class Contexto : DbContext
     public DbSet<Restaurantes> Restaurantes { get; set; }
     public DbSet<DetalleReservaRestaurante> DetallesReservaRestaurantes { get; set; }
     public DbSet<Reportes> Reportes { get; set; }
+    public DbSet<TarjetaCredito> TarjetaCredito { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

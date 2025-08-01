@@ -116,11 +116,17 @@ namespace URESERVE_Api.Controllers
         [HttpGet("usuario/{matricula}")]
         public async Task<ActionResult<IEnumerable<Reservaciones>>> GetReservacionesByMatricula(string matricula)
         {
+            // Validación básica
+            if (string.IsNullOrWhiteSpace(matricula))
+            {
+                return BadRequest("La matrícula es requerida.");
+            }
+
             var reservas = await _context.Reservaciones
                 .Where(r => r.Matricula == matricula)
                 .ToListAsync();
 
-            if (reservas == null || !reservas.Any())
+            if (!reservas.Any())
             {
                 return NotFound($"No se encontraron reservaciones para la matrícula: {matricula}");
             }

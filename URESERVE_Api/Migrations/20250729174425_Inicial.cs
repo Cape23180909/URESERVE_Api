@@ -28,6 +28,24 @@ namespace URESERVE_Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DetallesReservaRestaurantes",
+                columns: table => new
+                {
+                    DetalleReservaRestauranteId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    Apellidos = table.Column<string>(type: "TEXT", nullable: false),
+                    Cedula = table.Column<string>(type: "TEXT", nullable: false),
+                    Telefono = table.Column<string>(type: "TEXT", nullable: false),
+                    Direccion = table.Column<string>(type: "TEXT", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetallesReservaRestaurantes", x => x.DetalleReservaRestauranteId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Estudiantes",
                 columns: table => new
                 {
@@ -127,6 +145,22 @@ namespace URESERVE_Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Restaurantes", x => x.RestauranteId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TarjetaCredito",
+                columns: table => new
+                {
+                    TarjetaCreditoId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    numeroTarjeta = table.Column<string>(type: "TEXT", nullable: false),
+                    nombreTitular = table.Column<string>(type: "TEXT", nullable: false),
+                    fechaVencimiento = table.Column<string>(type: "TEXT", nullable: false),
+                    codigoSeguridad = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TarjetaCredito", x => x.TarjetaCreditoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,46 +274,6 @@ namespace URESERVE_Api.Migrations
                         principalColumn: "ProyectorId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "DetallesReservaRestaurantes",
-                columns: table => new
-                {
-                    DetalleReservaRestauranteId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CodigoReserva = table.Column<int>(type: "INTEGER", nullable: false),
-                    IdRestaurante = table.Column<int>(type: "INTEGER", nullable: false),
-                    Matricula = table.Column<string>(type: "TEXT", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Horario = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    CantidadEstudiantes = table.Column<int>(type: "INTEGER", nullable: false),
-                    Estado = table.Column<int>(type: "INTEGER", nullable: false),
-                    ReservacionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RestauranteId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EstudianteId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DetallesReservaRestaurantes", x => x.DetalleReservaRestauranteId);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaRestaurantes_Estudiantes_EstudianteId",
-                        column: x => x.EstudianteId,
-                        principalTable: "Estudiantes",
-                        principalColumn: "EstudianteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaRestaurantes_Reservaciones_ReservacionId",
-                        column: x => x.ReservacionId,
-                        principalTable: "Reservaciones",
-                        principalColumn: "ReservacionId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DetallesReservaRestaurantes_Restaurantes_RestauranteId",
-                        column: x => x.RestauranteId,
-                        principalTable: "Restaurantes",
-                        principalColumn: "RestauranteId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Cubiculos",
                 columns: new[] { "CubiculoId", "Disponible", "Nombre" },
@@ -336,21 +330,6 @@ namespace URESERVE_Api.Migrations
                 column: "ProyectorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaRestaurantes_EstudianteId",
-                table: "DetallesReservaRestaurantes",
-                column: "EstudianteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaRestaurantes_ReservacionId",
-                table: "DetallesReservaRestaurantes",
-                column: "ReservacionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetallesReservaRestaurantes_RestauranteId",
-                table: "DetallesReservaRestaurantes",
-                column: "RestauranteId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_EstudianteId",
                 table: "Usuarios",
                 column: "EstudianteId");
@@ -375,6 +354,15 @@ namespace URESERVE_Api.Migrations
                 name: "Reportes");
 
             migrationBuilder.DropTable(
+                name: "Reservaciones");
+
+            migrationBuilder.DropTable(
+                name: "Restaurantes");
+
+            migrationBuilder.DropTable(
+                name: "TarjetaCredito");
+
+            migrationBuilder.DropTable(
                 name: "TiposCargo");
 
             migrationBuilder.DropTable(
@@ -388,12 +376,6 @@ namespace URESERVE_Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Proyectores");
-
-            migrationBuilder.DropTable(
-                name: "Reservaciones");
-
-            migrationBuilder.DropTable(
-                name: "Restaurantes");
 
             migrationBuilder.DropTable(
                 name: "Estudiantes");

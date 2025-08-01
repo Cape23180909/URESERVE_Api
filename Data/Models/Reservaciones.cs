@@ -13,7 +13,7 @@ public class Reservaciones
     public int ReservacionId { get; set; }
 
     public int CodigoReserva { get; set; }
-    public int TipoReserva { get; set; } // 1=Proyectores, 2=Cubiculos, 3=laboratorio, 4=Restaurante.
+    public int TipoReserva { get; set; } // 1=Proyectores, 2=Cubiculos, 3=laboratorio, 4=SalaVIP, 5=SalaReuniones, 6=Restaurante
     public int CantidadEstudiantes { get; set; }
     public DateTime Fecha { get; set; } = DateTime.Now;
     public TimeSpan HoraInicio { get; set; }
