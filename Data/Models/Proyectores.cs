@@ -16,4 +16,6 @@ public class Proyectores
     public string Nombre { get; set; }
     public int Cantidad { get; set; }
     public string Conectividad { get; set; }  // Ej: HDMI, VGA, USB
+
+    public bool Disponible { get; set; }
 }

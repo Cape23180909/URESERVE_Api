@@ -56,26 +56,65 @@ public class Contexto : DbContext
             ProyectorId = 1,
             Nombre = "Proyector Epson EB-X41",
             Cantidad = 5,
-            Conectividad = "HDMI, VGA"
+            Conectividad = "HDMI, VGA",
+            Disponible = true
         },
         new Proyectores() {
             ProyectorId = 2,
             Nombre = "Proyector BenQ MW632",
             Cantidad = 3,
-            Conectividad = "HDMI, USB, Wireless"
+            Conectividad = "HDMI, USB, Wireless",
+             Disponible = true
         },
         new Proyectores() {
             ProyectorId = 3,
             Nombre = "Proyector Sony VPL-DX120",
             Cantidad = 2,
-            Conectividad = "HDMI, VGA, LAN"
+            Conectividad = "HDMI, VGA, LAN",
+             Disponible = true
         },
         new Proyectores() {
             ProyectorId = 4,
             Nombre = "Proyector Optoma X341",
             Cantidad = 4,
-            Conectividad = "HDMI, VGA, USB"
+            Conectividad = "HDMI, VGA, USB",
+             Disponible = true
         }
     });
+        modelBuilder.Entity<Restaurantes>().HasData(
+      new Restaurantes
+      {
+          RestauranteId = 1,
+          Nombre = " SalaVIP",
+          Ubicacion = "Edificio Principal, Primer Piso",
+          Capacidad = 15,
+          Telefono = "809-555-1001",
+          Correo = "salavip@universidad.edu",
+          Descripcion = "Área exclusiva para comidas ejecutivas y reuniones privadas",
+          Disponible = true
+      },
+      new Restaurantes
+      {
+          RestauranteId = 2,
+          Nombre = "SalaReuniones",
+          Ubicacion = "Edificio Administrativo, Segundo Piso",
+          Capacidad = 35,
+          Telefono = "809-555-1002",
+          Correo = "salareuniones@universidad.edu",
+          Descripcion = "Espacio amplio para reuniones de equipo con servicio de catering",
+          Disponible = true
+      },
+      new Restaurantes
+      {
+          RestauranteId = 3,
+          Nombre = "Restaurante",
+          Ubicacion = "Edificio Comedor Central, Planta Baja",
+          Capacidad = 15,
+          Telefono = "809-555-1003",
+          Correo = "restaurante@universidad.edu",
+          Descripcion = "Comedor principal con variedad de opciones gastronómicas",
+          Disponible = true
+      }
+  );
     }
 }

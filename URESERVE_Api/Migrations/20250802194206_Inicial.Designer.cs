@@ -11,7 +11,7 @@ using URESERVE_Api.DAL;
 namespace URESERVE_Api.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250729174425_Inicial")]
+    [Migration("20250802194206_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -332,6 +332,9 @@ namespace URESERVE_Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Disponible")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -346,6 +349,7 @@ namespace URESERVE_Api.Migrations
                             ProyectorId = 1,
                             Cantidad = 5,
                             Conectividad = "HDMI, VGA",
+                            Disponible = true,
                             Nombre = "Proyector Epson EB-X41"
                         },
                         new
@@ -353,6 +357,7 @@ namespace URESERVE_Api.Migrations
                             ProyectorId = 2,
                             Cantidad = 3,
                             Conectividad = "HDMI, USB, Wireless",
+                            Disponible = true,
                             Nombre = "Proyector BenQ MW632"
                         },
                         new
@@ -360,6 +365,7 @@ namespace URESERVE_Api.Migrations
                             ProyectorId = 3,
                             Cantidad = 2,
                             Conectividad = "HDMI, VGA, LAN",
+                            Disponible = true,
                             Nombre = "Proyector Sony VPL-DX120"
                         },
                         new
@@ -367,6 +373,7 @@ namespace URESERVE_Api.Migrations
                             ProyectorId = 4,
                             Cantidad = 4,
                             Conectividad = "HDMI, VGA, USB",
+                            Disponible = true,
                             Nombre = "Proyector Optoma X341"
                         });
                 });
@@ -460,6 +467,9 @@ namespace URESERVE_Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Disponible")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -475,6 +485,41 @@ namespace URESERVE_Api.Migrations
                     b.HasKey("RestauranteId");
 
                     b.ToTable("Restaurantes");
+
+                    b.HasData(
+                        new
+                        {
+                            RestauranteId = 1,
+                            Capacidad = 15,
+                            Correo = "salavip@universidad.edu",
+                            Descripcion = "Área exclusiva para comidas ejecutivas y reuniones privadas",
+                            Disponible = true,
+                            Nombre = "SalaVIP",
+                            Telefono = "809-555-1001",
+                            Ubicacion = "Edificio Principal, Primer Piso"
+                        },
+                        new
+                        {
+                            RestauranteId = 2,
+                            Capacidad = 35,
+                            Correo = "salareuniones@universidad.edu",
+                            Descripcion = "Espacio amplio para reuniones de equipo con servicio de catering",
+                            Disponible = true,
+                            Nombre = "SalaReuniones",
+                            Telefono = "809-555-1002",
+                            Ubicacion = "Edificio Administrativo, Segundo Piso"
+                        },
+                        new
+                        {
+                            RestauranteId = 3,
+                            Capacidad = 15,
+                            Correo = "restaurante@universidad.edu",
+                            Descripcion = "Comedor principal con variedad de opciones gastronómicas",
+                            Disponible = true,
+                            Nombre = "Restaurante",
+                            Telefono = "809-555-1003",
+                            Ubicacion = "Edificio Comedor Central, Planta Baja"
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.TarjetaCredito", b =>

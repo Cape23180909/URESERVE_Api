@@ -82,7 +82,8 @@ namespace URESERVE_Api.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Nombre = table.Column<string>(type: "TEXT", nullable: false),
                     Cantidad = table.Column<int>(type: "INTEGER", nullable: false),
-                    Conectividad = table.Column<string>(type: "TEXT", nullable: false)
+                    Conectividad = table.Column<string>(type: "TEXT", nullable: false),
+                    Disponible = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,7 +141,8 @@ namespace URESERVE_Api.Migrations
                     Capacidad = table.Column<int>(type: "INTEGER", nullable: false),
                     Telefono = table.Column<string>(type: "TEXT", nullable: false),
                     Correo = table.Column<string>(type: "TEXT", nullable: false),
-                    Descripcion = table.Column<string>(type: "TEXT", nullable: false)
+                    Descripcion = table.Column<string>(type: "TEXT", nullable: false),
+                    Disponible = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -305,13 +307,23 @@ namespace URESERVE_Api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Proyectores",
-                columns: new[] { "ProyectorId", "Cantidad", "Conectividad", "Nombre" },
+                columns: new[] { "ProyectorId", "Cantidad", "Conectividad", "Disponible", "Nombre" },
                 values: new object[,]
                 {
-                    { 1, 5, "HDMI, VGA", "Proyector Epson EB-X41" },
-                    { 2, 3, "HDMI, USB, Wireless", "Proyector BenQ MW632" },
-                    { 3, 2, "HDMI, VGA, LAN", "Proyector Sony VPL-DX120" },
-                    { 4, 4, "HDMI, VGA, USB", "Proyector Optoma X341" }
+                    { 1, 5, "HDMI, VGA", true, "Proyector Epson EB-X41" },
+                    { 2, 3, "HDMI, USB, Wireless", true, "Proyector BenQ MW632" },
+                    { 3, 2, "HDMI, VGA, LAN", true, "Proyector Sony VPL-DX120" },
+                    { 4, 4, "HDMI, VGA, USB", true, "Proyector Optoma X341" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Restaurantes",
+                columns: new[] { "RestauranteId", "Capacidad", "Correo", "Descripcion", "Disponible", "Nombre", "Telefono", "Ubicacion" },
+                values: new object[,]
+                {
+                    { 1, 15, "salavip@universidad.edu", "Área exclusiva para comidas ejecutivas y reuniones privadas", true, "SalaVIP", "809-555-1001", "Edificio Principal, Primer Piso" },
+                    { 2, 35, "salareuniones@universidad.edu", "Espacio amplio para reuniones de equipo con servicio de catering", true, "SalaReuniones", "809-555-1002", "Edificio Administrativo, Segundo Piso" },
+                    { 3, 15, "restaurante@universidad.edu", "Comedor principal con variedad de opciones gastronómicas", true, "Restaurante", "809-555-1003", "Edificio Comedor Central, Planta Baja" }
                 });
 
             migrationBuilder.CreateIndex(
