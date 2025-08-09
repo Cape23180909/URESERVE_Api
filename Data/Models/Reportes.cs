@@ -11,11 +11,11 @@ public class Reportes
 {
     [Key]
     public int ReporteId { get; set; }
-    public int TipoReporte { get; set; } // 1=proyectores, 2=cubiculos, 3=laboratorios, 4=restaurante
+    public int TipoReporte { get; set; } // 1=Proyectores, 2=Cubiculos, 3=laboratorio, 4=SalaVIP, 5=SalaReuniones, 6=Restaurante
     public DateTime FechaInicio { get; set; }
     public DateTime FechaFin { get; set; }
     public DateTime FechaGeneracion { get; set; }
-    public string GeneradoPor { get; set; } // Matrícula o ID del administrador
+    public string GeneradoPor { get; set; } // Matrícula
 
     // Datos del reporte (podrían ser propiedades adicionales o una relación con otra tabla)
     public int TotalReservas { get; set; }

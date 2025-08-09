@@ -11,7 +11,7 @@ using URESERVE_Api.DAL;
 namespace URESERVE_Api.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250802194206_Inicial")]
+    [Migration("20250806203217_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -494,7 +494,7 @@ namespace URESERVE_Api.Migrations
                             Correo = "salavip@universidad.edu",
                             Descripcion = "Área exclusiva para comidas ejecutivas y reuniones privadas",
                             Disponible = true,
-                            Nombre = "SalaVIP",
+                            Nombre = " SalaVIP",
                             Telefono = "809-555-1001",
                             Ubicacion = "Edificio Principal, Primer Piso"
                         },

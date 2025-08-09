@@ -321,7 +321,7 @@ namespace URESERVE_Api.Migrations
                 columns: new[] { "RestauranteId", "Capacidad", "Correo", "Descripcion", "Disponible", "Nombre", "Telefono", "Ubicacion" },
                 values: new object[,]
                 {
-                    { 1, 15, "salavip@universidad.edu", "Área exclusiva para comidas ejecutivas y reuniones privadas", true, "SalaVIP", "809-555-1001", "Edificio Principal, Primer Piso" },
+                    { 1, 15, "salavip@universidad.edu", "Área exclusiva para comidas ejecutivas y reuniones privadas", true, " SalaVIP", "809-555-1001", "Edificio Principal, Primer Piso" },
                     { 2, 35, "salareuniones@universidad.edu", "Espacio amplio para reuniones de equipo con servicio de catering", true, "SalaReuniones", "809-555-1002", "Edificio Administrativo, Segundo Piso" },
                     { 3, 15, "restaurante@universidad.edu", "Comedor principal con variedad de opciones gastronómicas", true, "Restaurante", "809-555-1003", "Edificio Comedor Central, Planta Baja" }
                 });

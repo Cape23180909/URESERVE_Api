@@ -491,7 +491,7 @@ namespace URESERVE_Api.Migrations
                             Correo = "salavip@universidad.edu",
                             Descripcion = "Área exclusiva para comidas ejecutivas y reuniones privadas",
                             Disponible = true,
-                            Nombre = "SalaVIP",
+                            Nombre = " SalaVIP",
                             Telefono = "809-555-1001",
                             Ubicacion = "Edificio Principal, Primer Piso"
                         },
